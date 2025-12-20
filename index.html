@@ -7,10 +7,49 @@
             padding: 0;
             overflow: hidden; /* Hides scrollbars for a clean TV look */
         }
+
+        /* 2. List Styling */
+        ul {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 15px; /* Space between items */
+        }
+
+        /* 3. Link Styling (The Buttons) */
+        a {
+            display: block; /* Makes the whole bar clickable/selectable */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle box background */
+            color: #ffffff;
+            text-decoration: none; /* Remove underline */
+            font-size: 24px; /* Large text for TV */
+            border-radius: 8px; /* Soft edges */
+            border: 2px solid transparent; /* Reserve space for border to prevent jumping */
+            transition: all 0.2s; /* Smooth animation */
+        }
+
+        /* 4. Remote Control Focus State (CRITICAL) */
+        /* This changes the look when the remote 'selects' the item */
+        a:focus, a:hover {
+            background-color: #ffffff;
+            color: #000033;
+            border-color: #00ffff; /* Bright border to show selection */
+            transform: scale(1.02); /* Slight pop-out effect */
+            outline: none; /* Remove default browser focus outline */
+        }
     </style>
 </head>
 <body>
     <h1>Mom's home page</h1>
 
-    <h2>dark enough?</h2>
+    <ul>
+        <li><a href="https://www.youtube.com/embed/C9adOqvpieo?autoplay=1">Family Vacation Video</a></li>
+        <li><a href="https://www.youtube.com/embed/C9adOqvpieo?autoplay=1">Grandkids Recital</a></li>
+        <li><a href="https://example.com/playlist">Relaxing Music</a></li>
+        <li><a href="https://example.com/photos">Photo Slideshow</a></li>
+    </ul>
 </body>
