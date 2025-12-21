@@ -1,55 +1,159 @@
+<!DOCTYPE html>
+<html>
 <head>
+    <title>Mom's TV Kiosk</title>
     <style>
-        body {
-            background-color: #000033; /* Very Dark Blue */
-            color: white; /* Sets text to white so it's readable */
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Hides scrollbars for a clean TV look */
+        /* --- GLOBAL RESET --- */
+        * {
+            box-sizing: border-box;
         }
 
-        /* 2. List Styling */
+        body {
+            background-color: #000033; /* Midnight Blue */
+            color: white;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Fill the screen */
+            overflow: hidden; /* Stop whole-page scrolling */
+            display: flex; /* Activate Split Screen */
+        }
+
+        /* --- LEFT COLUMN: MENU (25%) --- */
+        nav {
+            width: 25%;
+            height: 100%;
+            background-color: #050510; /* Slightly darker than body */
+            border-right: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto; /* Scroll if list is too long */
+        }
+
+        /* --- RIGHT COLUMN: CONTENT (75%) --- */
+        main {
+            width: 75%;
+            height: 100%;
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* --- MENU ITEMS --- */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #aaa;
+        }
+
         ul {
-            list-style-type: none; /* Remove default bullet points */
+            list-style: none;
             padding: 0;
             margin: 0;
         }
 
         li {
-            margin-bottom: 15px; /* Space between items */
+            margin-bottom: 15px;
         }
 
-        /* 3. Link Styling (The Buttons) */
         a {
-            display: block; /* Makes the whole bar clickable/selectable */
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle box background */
-            color: #ffffff;
-            text-decoration: none; /* Remove underline */
-            font-size: 24px; /* Large text for TV */
-            border-radius: 8px; /* Soft edges */
-            border: 2px solid transparent; /* Reserve space for border to prevent jumping */
-            transition: all 0.2s; /* Smooth animation */
+            display: block;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+            text-decoration: none;
+            font-size: 22px; /* Large text */
+            border-radius: 8px;
+            border: 3px solid transparent;
+            transition: all 0.2s;
         }
 
-        /* 4. Remote Control Focus State (CRITICAL) */
-        /* This changes the look when the remote 'selects' the item */
+        /* REMOTE CONTROL FOCUS STATE */
         a:focus, a:hover {
-            background-color: #ffffff;
+            background-color: white;
             color: #000033;
-            border-color: #00ffff; /* Bright border to show selection */
-            transform: scale(1.02); /* Slight pop-out effect */
-            outline: none; /* Remove default browser focus outline */
+            border-color: #00ffff;
+            transform: scale(1.03);
+            outline: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            z-index: 10; /* Bring forward */
+        }
+
+        /* "ACTIVE" STATE (Shows what is currently playing) */
+        a.active {
+            background-color: #00008B; /* Dark Blue */
+            color: white;
+            border-color: #4444ff;
         }
     </style>
 </head>
 <body>
-    <h1>Mom's home page</h1>
 
-    <ul>
-        <li><a href="https://www.youtube.com/embed/C9adOqvpieo?autoplay=1">Family Vacation Video</a></li>
-        <li><a href="https://www.youtube.com/embed/C9adOqvpieo?autoplay=1">Grandkids Recital</a></li>
-        <li><a href="https://example.com/playlist">Relaxing Music</a></li>
-        <li><a href="https://example.com/photos">Photo Slideshow</a></li>
-    </ul>
+    <nav>
+        <h1>Select Channel</h1>
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/embed?listType=playlist&list=PL13C8BA55480285D8&autoplay=1" 
+            target="content-frame"
+            onclick="setActive(this)">
+            🎵 Classical Playlist
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" 
+            target="content-frame"
+            onclick="setActive(this)">
+            ☕ Lofi Radio
+            </a>
+        </li>
+
+            <li>
+                <a href="https://docs.google.com/presentation/d/e/2PACX-1vR_g-y..../embed?start=true&loop=true&delayms=3000" 
+                   target="content-frame"
+                   onclick="setActive(this)">
+                   🖼️ Family Photos
+                </a>
+            </li>
+
+             <li>
+                <a href="https://meet.jit.si/MomsLivingRoom12345" 
+                   target="content-frame"
+                   onclick="setActive(this)">
+                   📞 Video Call
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <iframe 
+            name="content-frame" 
+            src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </main>
+
+    <script>
+        // Simple script to highlight the selected button
+        function setActive(element) {
+            // Remove 'active' class from all links
+            var links = document.querySelectorAll('a');
+            links.forEach(link => link.classList.remove('active'));
+            
+            // Add 'active' class to the clicked link
+            element.classList.add('active');
+        }
+    </script>
+
 </body>
+</html>
