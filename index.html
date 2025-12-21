@@ -100,6 +100,15 @@
     <nav>
         <h1>Select Channel</h1>
         <ul>
+
+            <li>
+                <a href="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000" 
+                   target="content-frame"
+                   onclick="setActive(this)">
+                   🖼️ Family Photos
+                </a>
+            </li>
+
           <li>
             <a href="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1" 
             target="content-frame"
@@ -116,13 +125,6 @@
             </a>
         </li>
 
-            <li>
-                <a href="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000" 
-                   target="content-frame"
-                   onclick="setActive(this)">
-                   🖼️ Family Photos
-                </a>
-            </li>
 
              <li>
                 <a href="https://meet.jit.si/MomsLivingRoom12345" 
@@ -143,17 +145,32 @@
         </iframe>
     </main>
 
-    <script>
-        // Simple script to highlight the selected button
-        function setActive(element) {
-            // Remove 'active' class from all links
-            var links = document.querySelectorAll('a');
-            links.forEach(link => link.classList.remove('active'));
-            
-            // Add 'active' class to the clicked link
-            element.classList.add('active');
+<script>
+    // 1. Force Focus on the first button when TV boots up
+    window.onload = function() {
+        var firstLink = document.querySelector('nav a');
+        if (firstLink) {
+            firstLink.focus();
         }
-    </script>
+    };
+
+    // 2. Safe Channel Changer (Prevents Iframe from stealing remote)
+    function changeChannel(url, element) {
+        // Update the Iframe Source
+        document.getElementsByName('content-frame')[0].src = url;
+
+        // Manage "Active" Blue visual
+        var links = document.querySelectorAll('a');
+        links.forEach(link => link.classList.remove('active'));
+        element.classList.add('active');
+
+        // CRITICAL: Pull focus back to the button immediately
+        // We use a tiny delay because iframes try to steal focus on load
+        setTimeout(() => {
+            element.focus();
+        }, 100);
+    }
+</script>
 
 </body>
 </html>
