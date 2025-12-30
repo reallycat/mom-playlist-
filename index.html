@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Mom's TV Kiosk</title>
     <style>
@@ -9,26 +10,32 @@
         }
 
         body {
-            background-color: #000033; /* Midnight Blue */
+            background-color: #000033;
+            /* Midnight Blue */
             color: white;
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Fill the screen */
-            overflow: hidden; /* Stop whole-page scrolling */
-            display: flex; /* Activate Split Screen */
+            height: 100vh;
+            /* Fill the screen */
+            overflow: hidden;
+            /* Stop whole-page scrolling */
+            display: flex;
+            /* Activate Split Screen */
         }
 
         /* --- LEFT COLUMN: MENU (25%) --- */
         nav {
             width: 25%;
             height: 100%;
-            background-color: #050510; /* Slightly darker than body */
+            background-color: #050510;
+            /* Slightly darker than body */
             border-right: 2px solid #333;
             display: flex;
             flex-direction: column;
             padding: 20px;
-            overflow-y: auto; /* Scroll if list is too long */
+            overflow-y: auto;
+            /* Scroll if list is too long */
         }
 
         /* --- RIGHT COLUMN: CONTENT (75%) --- */
@@ -69,14 +76,16 @@
             background-color: rgba(255, 255, 255, 0.05);
             color: #ddd;
             text-decoration: none;
-            font-size: 22px; /* Large text */
+            font-size: 22px;
+            /* Large text */
             border-radius: 8px;
             border: 3px solid transparent;
             transition: all 0.2s;
         }
 
         /* REMOTE CONTROL FOCUS STATE */
-        a:focus, a:hover {
+        a:focus,
+        a:hover {
             background-color: white;
             color: #000033;
             border-color: #00ffff;
@@ -84,17 +93,20 @@
             outline: none;
             font-weight: bold;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            z-index: 10; /* Bring forward */
+            z-index: 10;
+            /* Bring forward */
         }
 
         /* "ACTIVE" STATE (Shows what is currently playing) */
         a.active {
-            background-color: #00008B; /* Dark Blue */
+            background-color: #00008B;
+            /* Dark Blue */
             color: white;
             border-color: #4444ff;
         }
     </style>
 </head>
+
 <body>
 
     <nav>
@@ -102,75 +114,79 @@
         <ul>
 
             <li>
-                <a href="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000" 
-                   target="content-frame"
-                   onclick="setActive(this)">
-                   🖼️ Family Photos
+                <a href="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000"
+                    target="content-frame" onclick="setActive(this)">
+                    🖼️ Family Photos
                 </a>
             </li>
 
-          <li>
-            <a href="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1" 
-            target="content-frame"
-            onclick="setActive(this)">
-            😺 Animals!!!
-            </a>
-        </li>
+            <li>
+                <a href="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1" target="content-frame"
+                    onclick="setActive(this)">
+                    😺 Animals!!!
+                </a>
+            </li>
 
-        <li>
-            <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" 
-            target="content-frame"
-            onclick="setActive(this)">
-            ☕ Lofi Radio
-            </a>
-        </li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="content-frame" onclick="setActive(this)">
+                    ☕ Lofi Radio
+                </a>
+            </li>
 
 
-             <li>
-                <a href="https://meet.jit.si/MomsLivingRoom12345" 
-                   target="content-frame"
-                   onclick="setActive(this)">
-                   📞 Video Call
+            <li>
+                <a href="https://meet.jit.si/MomsLivingRoom12345" target="content-frame" onclick="setActive(this)">
+                    📞 Video Call
                 </a>
             </li>
         </ul>
     </nav>
 
     <main>
-        <iframe 
-            name="content-frame" 
-            src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        <iframe name="content-frame"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
         </iframe>
     </main>
 
-<script>
-    // 1. Force Focus on the first button when TV boots up
-    window.onload = function() {
-        var firstLink = document.querySelector('nav a');
-        if (firstLink) {
-            firstLink.focus();
+    <script>
+        // Simple script to highlight the selected button
+        function setActive(element) {
+            // Remove 'active' class from all links
+            var links = document.querySelectorAll('a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // Add 'active' class to the clicked link
+            element.classList.add('active');
         }
-    };
 
-    // 2. Safe Channel Changer (Prevents Iframe from stealing remote)
-    function changeChannel(url, element) {
-        // Update the Iframe Source
-        document.getElementsByName('content-frame')[0].src = url;
+        // 1. Force Focus on the first button when TV boots up
+        window.onload = function () {
+            var firstLink = document.querySelector('nav a');
+            if (firstLink) {
+                firstLink.focus();
+                firstLink.classList.add('active');
+            }
+        };
 
-        // Manage "Active" Blue visual
-        var links = document.querySelectorAll('a');
-        links.forEach(link => link.classList.remove('active'));
-        element.classList.add('active');
+        // 2. Safe Channel Changer (Prevents Iframe from stealing remote)
+        function changeChannel(url, element) {
+            // Update the Iframe Source
+            document.getElementsByName('content-frame')[0].src = url;
 
-        // CRITICAL: Pull focus back to the button immediately
-        // We use a tiny delay because iframes try to steal focus on load
-        setTimeout(() => {
-            element.focus();
-        }, 100);
-    }
-</script>
+            // Manage "Active" Blue visual
+            var links = document.querySelectorAll('a');
+            links.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+
+            // CRITICAL: Pull focus back to the button immediately
+            // We use a tiny delay because iframes try to steal focus on load
+            setTimeout(() => {
+                element.focus();
+            }, 100);
+        }
+    </script>
 
 </body>
+
 </html>
