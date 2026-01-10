@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Mom's TV Kiosk</title>
     <style>
         /* --- GLOBAL RESET --- */
@@ -115,30 +116,30 @@
 
             <li>
                 <a href="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000"
-                    target="content-frame" onclick="setActive(this)">
+                    target="content-frame" onclick="changeChannel(this.href, this); return false;">
                     🖼️ Family Photos
                 </a>
             </li>
 
             <li>
                 <a href="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1" target="content-frame"
-                    onclick="setActive(this)">
+                    onclick="changeChannel(this.href, this); return false;">
                     😺 Animals!!!
                 </a>
             </li>
-
             <li>
-                <a href="https://www.youtube.com/embed/videoseries?si=kWGxYw-aANVRxk81&amp;controls=0&amp;list=PLKpAqtwm94nWL4xR05ztGR5zCUNdYlegG" 
-                title="Stiri internationale" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" target="content-frame" onclick="setActive(this)">
+                <a href="https://www.youtube-nocookie.com/embed/videoseries?list=PLKpAqtwm94nWL4xR05ztGR5zCUNdYlegG&autoplay=1&loop=1"
+                    title="Stiri internationale" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    target="content-frame" onclick="changeChannel(this.href, this); return false;">
                     ☕ News
                 </a>
             </li>
 
-
             <li>
-                <a href="https://meet.jit.si/MomsLivingRoom12345" target="content-frame" onclick="setActive(this)">
+                <a href="https://meet.jit.si/MomsLivingRoom12345" 
+                target="content-frame" onclick="changeChannel(this.href, this); return false;">
                     📞 Video Call
                 </a>
             </li>
@@ -147,7 +148,8 @@
 
     <main>
         <iframe name="content-frame"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="camera; microphone; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen>
         </iframe>
     </main>
