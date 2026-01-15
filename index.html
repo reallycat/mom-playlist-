@@ -140,4 +140,42 @@
 
         // Initial boot behavior
         window.onload = () => {
-           
+            buttons[0].classList.add("active");
+            buttons[0].focus();
+            iframe.src = buttons[0].dataset.url;
+        };
+
+        // DPAD Navigation
+        window.addEventListener("keydown", (event) => {
+            const key = event.key;
+
+            // Prevent iframe or browser from handling keys
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (key === "ArrowUp") {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    buttons[currentIndex].focus();
+                }
+            }
+
+            else if (key === "ArrowDown") {
+                if (currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                    buttons[currentIndex].focus();
+                }
+            }
+
+            else if (key === "ArrowRight" || key === "Enter") {
+                activateButton(currentIndex);
+            }
+
+            else if (key === "ArrowLeft") {
+                // Do nothing — menu always keeps focus
+            }
+        });
+    </script>
+
+</body>
+</html>
