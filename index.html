@@ -100,13 +100,13 @@
     <nav>
         <h1>Canal v2</h1>
         <ul id="menu">
-            <li><button data-url="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000">🖼️ Family Photos</button></li>
+            <li><button data-url="https://docs.google.com/presentation/d/e/2PACX-1vSDBjF5i-hC2qf9_-hr4z9qqVUOil1lQqxYFCr8CyV-_a4wwMGyff7r0jkesqF_msL8j3KBzG4vK6CS/pubembed?start=true&loop=true&delayms=3000">🖼️ Photos</button></li>
 
-            <li><button data-url="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1">😺 Animals!!!</button></li>
+            <li><button data-url="https://www.youtube.com/embed/oRDRfikj2z8?autoplay=1">😺 Animale</button></li>
 
-            <li><button data-url="https://www.youtube-nocookie.com/embed/videoseries?list=PLKpAqtwm94nWL4xR05ztGR5zCUNdYlegG&autoplay=1&loop=1">☕ News</button></li>
+            <li><button data-url="https://www.youtube-nocookie.com/embed/videoseries?list=PLKpAqtwm94nWL4xR05ztGR5zCUNdYlegG&autoplay=1&loop=1">☕ Stiri</button></li>
 
-            <li><button data-url="https://meet.jit.si/MomsLivingRoom12345">📞 Video Call</button></li>
+            <li><button data-url="https://meet.jit.si/MomsLivingRoom12345">📞 Video</button></li>
         </ul>
     </nav>
 
@@ -117,6 +117,26 @@
             allowfullscreen>
         </iframe>
     </main>
+
+<div id="overlay-message"
+     style="
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        font-size: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+        z-index: 9999;
+        visibility: hidden;
+     ">
+     MESAJ pentru mama
+</div>
+
 
     <script>
         const buttons = Array.from(document.querySelectorAll("nav button"));
@@ -137,6 +157,16 @@
             // Always refocus the button
             setTimeout(() => btn.focus(), 50);
         }
+
+function showMessage(text, duration = 2000) {
+    const overlay = document.getElementById("overlay-message");
+    overlay.textContent = text;
+    overlay.style.visibility = "visible";
+
+    setTimeout(() => {
+        overlay.style.visibility = "hidden";
+    }, duration);
+}
 
         // Initial boot behavior
         window.onload = () => {
@@ -172,7 +202,7 @@
             }
 
             else if (key === "ArrowLeft") {
-                // Do nothing — menu always keeps focus
+                 showMessage("Butonul stanga");
             }
         });
     </script>
