@@ -204,8 +204,13 @@ function showMessage(text, duration = 2000) {
             else if (key === "ArrowLeft") {
                  showMessage("Butonul stanga");
             }
-                else if (key === "Back") {
+
+            else if (key === "Back" || key === "Escape") {
                  showMessage("Back button");
+            }
+
+            else {
+                showMessage(key);
             }
         });
     </script>
